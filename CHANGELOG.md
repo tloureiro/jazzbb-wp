@@ -12,7 +12,7 @@
   restrict demo networking and pin the tested WordPress version.
 - Refresh compatible dependency security fixes and add typecheck/offline checks,
   recovery/revision/fallback browser regressions, contributor docs and opt-in hooks.
-- Adopt GPL-2.0-or-later with third-party notices and describe AI contribution.
+- Adopt GPL-2.0-or-later with third-party notices.
 
 ## 0.1.0 source prototype
 

@@ -88,11 +88,7 @@ Read [development and architecture](docs/DEVELOPMENT.md),
 changes. [Unreleased changes](CHANGELOG.md) describe the current work; 0.1.0 is a
 source prototype, with no packaged release.
 
-## Contribution and license
-
-Thiago directs the AI implementation and tests the editor in real use. The code
-is AI-assisted; the project does not claim independent hand-written authorship.
-The latest fixes and documentation were also implemented with AI assistance.
+## License
 
 Project source is licensed under **GPL-2.0-or-later**; see [LICENSE](LICENSE).
 The companion theme retains its existing [MIT license](theme/nothing-burger/LICENSE).

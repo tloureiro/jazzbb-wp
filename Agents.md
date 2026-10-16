@@ -37,5 +37,5 @@ Record commands, platform and uncovered paths. PHP syntax/integration checks run
 in the declared WordPress container. Do not treat prepared CI as a remote pass.
 Full browser/container workloads belong outside the quick pre-commit hook.
 
-Preserve third-party notices, honest AI contribution and source version history.
+Preserve third-party notices, source attribution and version history.
 Change only what solves an observed problem; avoid speculative frameworks/features.
