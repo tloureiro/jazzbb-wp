@@ -1,0 +1,377 @@
+:root {
+	--jazzbb-accent: #111827;
+	--jazzbb-border: #e5e7eb;
+	--jazzbb-bg: #ffffff;
+	--jazzbb-muted: #6b7280;
+}
+
+#jazzbb-wp-editor-root {
+	margin-top: 14px;
+	max-width: 100%;
+}
+
+.jazzbb-wp-shell {
+	border: 1px solid var(--jazzbb-border);
+	background: var(--jazzbb-bg);
+	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+	border-radius: 8px;
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+	padding: 16px;
+	box-sizing: border-box;
+	--jazzbb-font-scale: 1;
+	width: 100%;
+	margin: 0;
+}
+
+.jazzbb-wp-controls {
+	position: relative;
+	display: flex;
+	flex-wrap: wrap;
+	gap: 6px;
+	align-items: center;
+	padding-right: 72px; /* reserve room for search toggle */
+}
+
+.jazzbb-wp-toolbar {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 6px;
+	align-items: center;
+}
+
+.jazzbb-wp-button {
+	border: 1px solid var(--jazzbb-border);
+	background: #f9fafb;
+	border-radius: 6px;
+	padding: 6px 10px;
+	font-size: 13px;
+	line-height: 1.2;
+	cursor: pointer;
+	color: var(--jazzbb-accent);
+}
+
+.jazzbb-wp-button:hover {
+	background: #eef2ff;
+}
+
+.jazzbb-wp-status {
+	font-size: 12px;
+	color: var(--jazzbb-muted);
+	min-height: 16px;
+}
+
+.jazzbb-wp-editor-surface {
+	border: 1px solid var(--jazzbb-border);
+	border-radius: 6px;
+	min-height: 420px;
+	padding: 14px;
+	position: relative;
+	z-index: 2;
+}
+
+.jazzbb-wp-search {
+	display: flex;
+	align-items: center;
+	gap: 6px;
+	background: #f3f4f6;
+	border: 1px solid var(--jazzbb-border);
+	border-radius: 6px;
+	padding: 4px 8px;
+	font-size: 12px;
+	color: var(--jazzbb-muted);
+	min-width: 32px;
+	position: absolute;
+	right: 0;
+	top: 0;
+	height: 32px;
+	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+}
+
+.jazzbb-wp-search button {
+	border: none;
+	background: transparent;
+	color: var(--jazzbb-accent);
+	cursor: pointer;
+	padding: 2px;
+	font-size: 15px;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.jazzbb-wp-search input[type='search'] {
+	border: none;
+	outline: none;
+	background: transparent;
+	font-size: 13px;
+	min-width: 0;
+	width: 0;
+	padding: 2px 0;
+	color: var(--jazzbb-accent);
+	opacity: 0;
+	transition: width 120ms ease, opacity 120ms ease;
+}
+
+.jazzbb-wp-search input[type='search']::placeholder {
+	color: var(--jazzbb-muted);
+}
+
+.jazzbb-wp-search.is-open input[type='search'] {
+	width: 160px;
+	opacity: 1;
+}
+
+@media (max-width: 960px) {
+	.jazzbb-wp-shell {
+		width: 100%;
+		margin: 0;
+	}
+}
+#jazzbb-wp-outline {
+	padding: 8px 0;
+}
+
+#jazzbb-wp-outline-list {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+	display: flex;
+	flex-direction: column;
+	gap: 6px;
+}
+
+.jazzbb-wp-outline-item button {
+	all: unset;
+	cursor: pointer;
+	font-size: 13px;
+	color: #111827;
+	padding: 4px 6px;
+	border-radius: 4px;
+	display: block;
+	width: 100%;
+}
+
+.jazzbb-wp-outline-item button:hover {
+	background: #eef2ff;
+}
+
+.jazzbb-wp-outline-item.level-2 button {
+	padding-left: 14px;
+}
+
+.jazzbb-wp-outline-item.level-3 button {
+	padding-left: 22px;
+}
+
+.jazzbb-wp-outline-empty {
+	color: var(--jazzbb-muted);
+	font-size: 12px;
+}
+
+.jazzbb-wp-scale {
+	display: none; /* keep markup for future use but hide in UI */
+}
+
+.jazzbb-wp-scale input[type='range'] {
+	min-width: 160px;
+	flex: 1;
+}
+
+.jazzbb-wp-editor-surface .ProseMirror {
+	min-height: 396px;
+	outline: none;
+	font-size: calc(18px * var(--jazzbb-font-scale, 1)) !important;
+	line-height: 1.7;
+	color: #0f172a;
+}
+
+.jazzbb-wp-editor-surface .ProseMirror p.is-editor-empty:first-child::before {
+	content: attr(data-placeholder);
+	float: left;
+	color: var(--jazzbb-muted);
+	pointer-events: none;
+	height: 0;
+}
+
+.jazzbb-wp-editor-surface .ProseMirror p {
+	margin: 0 0 1em;
+}
+
+.jazzbb-wp-editor-surface .ProseMirror li {
+	font-size: calc(18px * var(--jazzbb-font-scale, 1)) !important;
+	line-height: 1.4;
+	margin: 0.05em 0;
+}
+
+.jazzbb-wp-editor-surface .ProseMirror li p {
+	margin: 0;
+	line-height: inherit;
+}
+
+.jazzbb-wp-editor-surface .ProseMirror pre {
+	background: #0f172a;
+	color: #e5e7eb;
+	padding: 12px 14px;
+	border-radius: 8px;
+	overflow: auto;
+	border: 1px solid #1f2937;
+	font-family: 'SFMono-Regular', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New',
+		monospace;
+	font-size: 14px;
+	line-height: 1.4;
+	margin: 0.25em 0 0.65em;
+	min-height: 0;
+	max-width: 70ch;
+}
+
+.jazzbb-wp-editor-surface .ProseMirror blockquote {
+	border-left: 4px solid var(--jazzbb-border);
+	padding-left: 12px;
+	color: #374151;
+	margin: 0.6em 0;
+}
+
+.jazzbb-wp-editor-surface .ProseMirror ul,
+.jazzbb-wp-editor-surface .ProseMirror ol {
+	padding-left: 20px;
+	margin: 0 0 0.5em;
+}
+
+.jazzbb-wp-editor-surface .ProseMirror ul {
+	list-style: disc;
+}
+
+.jazzbb-wp-editor-surface .ProseMirror ol {
+	list-style: decimal;
+}
+
+.jazzbb-wp-editor-surface .ProseMirror ul[data-type='taskList'] {
+	list-style: none;
+	padding: 0;
+}
+
+.jazzbb-wp-editor-surface .ProseMirror ul[data-type='taskList'] li {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+}
+
+.jazzbb-wp-editor-surface .ProseMirror ul[data-type='taskList'] input[type='checkbox'] {
+	width: 18px;
+	height: 18px;
+}
+
+.jazzbb-wp-editor-surface .ProseMirror h1 {
+	font-size: calc(32px * var(--jazzbb-font-scale, 1)) !important;
+	line-height: 1.25;
+	margin: 0.6em 0 0.4em;
+}
+
+.jazzbb-wp-editor-surface .ProseMirror h2 {
+	font-size: calc(24px * var(--jazzbb-font-scale, 1)) !important;
+	line-height: 1.3;
+	margin: 0.6em 0 0.3em;
+	font-weight: 600;
+}
+
+.jazzbb-wp-editor-surface .ProseMirror h3 {
+	font-size: calc(18px * var(--jazzbb-font-scale, 1)) !important;
+	line-height: 1.35;
+	margin: 0.6em 0 0.3em;
+	font-weight: 600;
+}
+
+.jazzbb-wp-editor-surface .ProseMirror code {
+	background: #f3f4f6;
+	border-radius: 4px;
+	padding: 2px 4px;
+	font-family: 'SFMono-Regular', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New',
+		monospace;
+	font-size: calc(0.95em * var(--jazzbb-font-scale, 1)) !important;
+}
+
+.jazzbb-wp-editor-surface .ProseMirror pre code {
+	background: transparent;
+	padding: 0;
+	display: block;
+}
+
+.jazzbb-wp-editor-surface .ProseMirror .hljs {
+	background: #0f172a;
+	color: #e2e8f0;
+}
+
+/* Syntax tokens */
+.jazzbb-wp-editor-surface .ProseMirror .hljs-comment,
+.jazzbb-wp-editor-surface .ProseMirror .hljs-quote {
+	color: #9ca3af;
+}
+
+.jazzbb-wp-editor-surface .ProseMirror .hljs-keyword,
+.jazzbb-wp-editor-surface .ProseMirror .hljs-selector-tag,
+.jazzbb-wp-editor-surface .ProseMirror .hljs-addition {
+	color: #93c5fd;
+}
+
+.jazzbb-wp-editor-surface .ProseMirror .hljs-number,
+.jazzbb-wp-editor-surface .ProseMirror .hljs-literal,
+.jazzbb-wp-editor-surface .ProseMirror .hljs-variable {
+	color: #fbbf24;
+}
+
+.jazzbb-wp-editor-surface .ProseMirror .hljs-string,
+.jazzbb-wp-editor-surface .ProseMirror .hljs-doctag,
+.jazzbb-wp-editor-surface .ProseMirror .hljs-section,
+.jazzbb-wp-editor-surface .ProseMirror .hljs-selector-id,
+.jazzbb-wp-editor-surface .ProseMirror .hljs-title {
+	color: #4ade80;
+}
+
+.jazzbb-wp-editor-surface .ProseMirror .hljs-attribute,
+.jazzbb-wp-editor-surface .ProseMirror .hljs-name,
+.jazzbb-wp-editor-surface .ProseMirror .hljs-tag {
+	color: #f472b6;
+}
+
+.jazzbb-wp-editor-surface .ProseMirror .hljs-symbol,
+.jazzbb-wp-editor-surface .ProseMirror .hljs-bullet,
+.jazzbb-wp-editor-surface .ProseMirror .hljs-link {
+	color: #fdba74;
+}
+
+.jazzbb-wp-editor-surface .ProseMirror .hljs-emphasis {
+	font-style: italic;
+}
+
+.jazzbb-wp-editor-surface .ProseMirror .hljs-strong {
+	font-weight: 600;
+}
+
+.jazzbb-wp-editor-surface .ProseMirror table {
+	border-collapse: collapse;
+	width: 100%;
+}
+
+.jazzbb-wp-editor-surface .ProseMirror th,
+.jazzbb-wp-editor-surface .ProseMirror td {
+	border: 1px solid var(--jazzbb-border);
+	padding: 8px;
+}
+
+.jazzbb-wp-editor-surface .ProseMirror img {
+	max-width: 100%;
+	height: auto;
+	border-radius: 4px;
+}
+.jazzbb-wp-editor-surface .ProseMirror * {
+	font-size: inherit;
+}
+body.jazzbb-wp-ready #postdivrich,
+body.jazzbb-wp-ready #post-status-info {
+	display: none !important;
+}
+
+.jazzbb-wp-recovery { padding: 12px; }
+.jazzbb-wp-recovery button { margin: 0 8px 8px 0; }

@@ -1,0 +1,12 @@
+node_modules
+.data
+wp-content
+plugin/build
+dist
+.vite
+.DS_Store
+playwright-report
+test-results
+.env
+.env.*
+*.log

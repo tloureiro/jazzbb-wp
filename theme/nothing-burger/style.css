@@ -1,0 +1,391 @@
+/*
+Theme Name: Nothing Burger
+Theme URI: https://example.com/nothing-burger
+Author: jazzbb-wp
+Description: Minimal, typography-first theme with a centered column and restrained chrome.
+Version: 0.1.0
+License: MIT
+Text Domain: nothing-burger
+*/
+
+:root {
+	color-scheme: dark;
+	--nb-bg: #111418;
+	--nb-fg: #f5f7fa;
+	--nb-muted: #a6b0c2;
+	--nb-border: #1f242c;
+	--nb-code-bg: #1b2330;
+	--nb-code-fg: #f8fafc;
+}
+
+@media (prefers-color-scheme: light) {
+	:root {
+		color-scheme: light;
+		--nb-bg: #ffffff;
+		--nb-fg: #0f172a;
+		--nb-muted: #4b5563;
+		--nb-border: #e5e7eb;
+		--nb-code-bg: #0f172a;
+		--nb-code-fg: #e5e7eb;
+	}
+}
+
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+}
+
+body {
+	margin: 0;
+	font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+	background: var(--nb-bg);
+	color: var(--nb-fg);
+	font-size: 18px;
+	line-height: 1.7;
+}
+
+a {
+	color: inherit;
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+.nb-shell {
+	width: min(60vw, 960px);
+	margin: 0 auto;
+	padding: 48px 20px 64px;
+}
+
+.nb-header {
+	display: flex;
+	justify-content: space-between;
+	align-items: flex-start;
+	gap: 24px;
+	margin-bottom: 32px;
+	position: relative;
+}
+
+.nb-brand {
+	flex: 1;
+}
+
+.nb-title {
+	font-size: 22px;
+	font-weight: 100;
+	margin: 0 0 8px;
+	padding-left: 12px;
+	margin-left: -125px;
+	border-left: 2px solid var(--nb-border);
+	letter-spacing: -0.6px;
+	font-family: "DM Sans", "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+.nb-title a {
+	color: inherit;
+	text-decoration: none;
+	display: inline-block;
+	width: 100%;
+}
+
+.nb-site-desc {
+	color: var(--nb-muted);
+	font-size: 16px;
+	margin: 0;
+}
+
+.nb-header-actions {
+	display: flex;
+	align-items: center;
+	gap: 12px;
+}
+
+.nb-search {
+	position: relative;
+	display: inline-flex;
+	align-items: center;
+	border: 1px solid var(--nb-border);
+	border-radius: 999px;
+	background: rgba(255, 255, 255, 0.04);
+	transition: background 0.15s ease, border-color 0.15s ease;
+	padding-right: 0;
+}
+
+.nb-search-btn {
+	border: none;
+	background: transparent;
+	color: var(--nb-muted);
+	font-size: 18px;
+	padding: 6px 10px;
+	cursor: pointer;
+}
+
+.nb-search-form {
+	position: absolute;
+	right: 8px;
+	opacity: 0;
+	pointer-events: none;
+	transition: opacity 0.2s ease;
+}
+
+.nb-search.is-open .nb-search-form {
+	opacity: 1;
+	pointer-events: auto;
+	position: relative;
+	right: auto;
+	padding-right: 12px;
+}
+
+.nb-search-input {
+	border: none;
+	outline: none;
+	background: transparent;
+	color: var(--nb-fg);
+	width: 0;
+	min-width: 0;
+	padding: 4px 0;
+	font-size: 16px;
+	transition: width 0.2s ease;
+}
+
+.nb-search-input:focus {
+	box-shadow: none;
+}
+
+.nb-search-input::placeholder {
+	color: var(--nb-muted);
+}
+
+.nb-search.is-open {
+	background: rgba(255, 255, 255, 0.08);
+	border-color: rgba(255, 255, 255, 0.15);
+	padding-right: 0;
+}
+
+.nb-search.is-open .nb-search-input {
+	width: 200px;
+}
+
+.nb-visually-hidden {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	padding: 0;
+	margin: -1px;
+	overflow: hidden;
+	clip: rect(0, 0, 0, 0);
+	border: 0;
+}
+
+.nb-article {
+	padding-bottom: 40px;
+	border-bottom: 1px solid var(--nb-border);
+}
+
+.nb-article + .nb-article {
+	margin-top: 36px;
+}
+
+.nb-article h1 {
+	font-size: 38px;
+	margin: 0 0 12px;
+	line-height: 1.2;
+}
+
+.nb-article h2 {
+	font-size: 28px;
+	margin: 1.2em 0 0.6em;
+	line-height: 1.3;
+}
+
+.nb-article h3 {
+	font-size: 22px;
+	margin: 1em 0 0.5em;
+	line-height: 1.35;
+}
+
+.nb-meta {
+	color: var(--nb-muted);
+	font-size: 14px;
+	margin-bottom: 16px;
+}
+
+.nb-content p {
+	margin: 0 0 1em;
+}
+
+.nb-content a {
+	text-decoration: underline;
+	text-decoration-color: rgba(255, 255, 255, 0.3);
+	text-decoration-thickness: 1px;
+	text-underline-offset: 3px;
+}
+
+.nb-content a:hover {
+	text-decoration-color: currentColor;
+}
+
+.nb-content ul,
+.nb-content ol {
+	margin: 0 0 1em 1.25em;
+	padding: 0;
+}
+
+.nb-content li {
+	margin: 0.2em 0;
+}
+
+.nb-content blockquote {
+	border-left: 4px solid var(--nb-border);
+	padding-left: 14px;
+	color: var(--nb-muted);
+	margin: 1em 0;
+}
+
+.nb-content img,
+.nb-content figure {
+	display: block;
+	margin: 2rem auto;
+	max-width: 100%;
+	height: auto;
+}
+
+.nb-content iframe {
+	display: block;
+	margin: 2rem auto;
+	max-width: min(100%, 800px);
+	width: 100%;
+	aspect-ratio: 16 / 9;
+	height: auto;
+}
+
+.nb-content code {
+	background: #f3f4f6;
+	padding: 2px 5px;
+	border-radius: 4px;
+	font-family: "SFMono-Regular", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New",
+		monospace;
+	font-size: 0.95em;
+}
+
+@media (max-width: 960px) {
+	.nb-shell {
+		width: 100%;
+		margin: 0;
+	}
+
+	.nb-title {
+		margin-left: 0;
+		padding-left: 0;
+		border-left: 0;
+		font-size: 30px;
+	}
+
+	.nb-search.is-open .nb-search-input {
+		width: 120px;
+	}
+}
+
+.nb-content pre {
+	background: var(--nb-code-bg);
+	color: var(--nb-code-fg);
+	padding: 12px 14px;
+	border-radius: 8px;
+	overflow: auto;
+	margin: 0.8em 0;
+	border: 1px solid #1f2937;
+	min-height: 0;
+	max-width: 70ch;
+	width: fit-content;
+}
+
+.nb-content pre code {
+	background: transparent;
+	color: var(--nb-code-fg);
+	padding: 0;
+	font-size: 16px;
+	display: block;
+}
+
+/* Syntax highlighting */
+.nb-content .hljs {
+	background: var(--nb-code-bg);
+	color: var(--nb-code-fg);
+}
+
+.nb-content .hljs-comment,
+.nb-content .hljs-quote {
+	color: #9ca3af;
+}
+
+.nb-content .hljs-keyword,
+.nb-content .hljs-selector-tag,
+.nb-content .hljs-addition {
+	color: #93c5fd;
+}
+
+.nb-content .hljs-number,
+.nb-content .hljs-literal,
+.nb-content .hljs-variable {
+	color: #fbbf24;
+}
+
+.nb-content .hljs-string,
+.nb-content .hljs-doctag,
+.nb-content .hljs-section,
+.nb-content .hljs-selector-id,
+.nb-content .hljs-title {
+	color: #4ade80;
+}
+
+.nb-content .hljs-attribute,
+.nb-content .hljs-name,
+.nb-content .hljs-tag {
+	color: #f472b6;
+}
+
+.nb-content .hljs-symbol,
+.nb-content .hljs-bullet,
+.nb-content .hljs-link {
+	color: #fdba74;
+}
+
+.nb-content .hljs-emphasis {
+	font-style: italic;
+}
+
+.nb-content .hljs-strong {
+	font-weight: 600;
+}
+
+.nb-footer {
+	margin-top: 48px;
+	color: var(--nb-muted);
+	font-size: 14px;
+}
+
+input,
+textarea {
+	font: inherit;
+}
+
+@media (max-width: 640px) {
+	body {
+		font-size: 17px;
+	}
+	.nb-shell {
+		padding: 36px 16px 48px;
+	}
+	.nb-article h1 {
+		font-size: 32px;
+	}
+	.nb-article h2 {
+		font-size: 24px;
+	}
+	.nb-article h3 {
+		font-size: 20px;
+	}
+}
