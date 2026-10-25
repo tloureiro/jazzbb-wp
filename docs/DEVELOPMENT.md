@@ -119,3 +119,64 @@ A first clean installation can report a WordPress CLI `HTTP_HOST` warning if it
 boots before the site URL exists. Setup supplies an explicit `--url` to avoid it.
 Earlier browser logs also contained an inherited NO_COLOR/FORCE_COLOR warning;
 it is a runner-environment warning rather than a product deprecation.
+
+### October 25, 2026 dependency maintenance check
+
+Selected `markdown-it` 14.3.3, the compatible 14.x security backport for
+[inline HTML parsing](https://github.com/markdown-it/markdown-it/security/advisories/GHSA-vfgh-jcmw-g37q)
+and [multiline reference definitions](https://github.com/markdown-it/markdown-it/security/advisories/GHSA-gfr2-rv44-r23c).
+The direct renderer, `tiptap-markdown` and `prosemirror-markdown` resolve to one
+14.3.3 installation. The manifest requires at least that patch within 14.x;
+the lockfile retains the package integrity hash. Regenerated third-party notices.
+
+CI pins [checkout v7.0.1](https://github.com/actions/checkout/commit/3d3c42e5aac5ba805825da76410c181273ba90b1)
+and [setup-node v7.1.0](https://github.com/actions/setup-node/commit/949feb2413d6458794dcd2491c4babbbce0c15c1)
+to their full release commit hashes. Review covered the upstream signed release
+references, action metadata and startup source, including Node 24 entrypoints and
+the existing explicit npm cache setting. This was not a full upstream code audit
+or an executed remote CI run.
+
+Executed on macOS 27.0.1 / arm64, Node 24.14.1, npm 11.11.0, Playwright 1.56.1 /
+Chromium 141.0.7390.37, Docker Engine 29.7.2 and WordPress 7.1.3 / PHP 8.3.35:
+
+```sh
+npm ci
+npm run check
+npm audit
+npm ls markdown-it
+npm run notices
+```
+
+All five offline regressions, TypeScript checking and the production build passed;
+the audit reported zero vulnerabilities. The generated `plugin/build/admin.js.map`
+contains exactly one copy each of the patched inline-HTML and reference rules,
+with source content matching the installed package. Independent clean builds in
+the source directory and disposable copy produced identical JavaScript and CSS.
+Build output remains ignored and must be regenerated when installing the plugin.
+
+Used a new source-only copy under `/private/tmp`, without Git metadata, site data
+or browser profiles, and its own Compose project `jazzbb-wp-security-20261025`:
+
+```sh
+npm ci
+npm run build
+WP_PORT=18085 COMPOSE_PROJECT_NAME=jazzbb-wp-security-20261025 npm run wp:setup
+BASE_URL=http://localhost:18085 E2E_DISPOSABLE=1 npm run test:e2e
+docker compose -p jazzbb-wp-security-20261025 exec -T wordpress sh -c \
+  'find /var/www/html/wp-content/plugins/jazzbb-wp /var/www/html/wp-content/themes/nothing-burger -name "*.php" -print0 | xargs -0 -n1 php -l'
+WP_PORT=18085 docker compose -p jazzbb-wp-security-20261025 down
+```
+
+All 48 Chromium scenarios passed, including the existing visual checks and new
+reference/inline-HTML clipboard-to-save/reload pairing. Both the frontend renderer
+and Tiptap's bundled Markdown parser passed the six advisory payload checks:
+64,000 repeated openers for each of four inline HTML constructs, a 200,000-line
+unclosed reference title and a 20,000-line unclosed label, each within a five-second
+budget. Plugin and theme PHP lint passed in the declared WordPress container.
+The browser runner emitted only the inherited NO_COLOR/FORCE_COLOR warning.
+
+The stress tests isolate parser work from the rest of clipboard handling. A
+separate 200,000-line clipboard probe completed Markdown parsing in about 106 ms
+but exceeded a ten-second browser round-trip deadline after paste dispatch;
+whole-editor rendering of huge pasted documents remains unbounded. Other
+browsers/OSes, server autosaves/previews and remote CI remain unverified.

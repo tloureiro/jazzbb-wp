@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+- Update the shared `markdown-it` parser to 14.3.3 for the inline-HTML and
+  multiline-reference denial-of-service fixes; exercise both bundled parsers and
+  clipboard/save integration in Chromium.
+- Pin CI checkout and Node setup actions to reviewed release commit hashes.
 - Replace broad autosave-backup deletion with explicit per-user/post Markdown
   recovery, including empty drafts and visible storage failures.
 - Keep native editing for existing HTML/block posts and missing assets. Reject
