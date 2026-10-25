@@ -47,7 +47,7 @@
     "@types/markdown-it": "^14.1.2",
     "@types/markdown-it-footnote": "^3.0.4",
     "@types/node": "^22.8.4",
-    "typescript": "^5.4.5",
+    "typescript": "^7.0.2",
     "vite": "^7.2.4"
   },
   "engines": {
